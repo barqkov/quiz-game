@@ -44,8 +44,8 @@
 .game-question-answers {
   padding: 2rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: white;
   margin: 2% 0%;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.212);
@@ -88,4 +88,23 @@
   background-color: white;
   color: #5e35f2;
   border-color: #5e35f2;
+}
+
+/* .game-question-answers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} */
+
+.inner-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrong-answer {
+  color: red;
+}
+
+.right-answer {
+  color: green;
 }

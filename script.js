@@ -47,7 +47,6 @@
 
         let result = sendHttpRequest("GET", `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`);
 
-
         fillQuestions(result);
     };
 
@@ -79,24 +78,31 @@
         }
 
         if (responseCode === 0) {
+            correctAnswers = [];
             let jsxParse = "";
             // console.log(questionArray);
-
             for (let i = 0; i < questionArray.length; i++) {
                 correctAnswers.push(questionArray[i].correct_answer);
                 let answersArr = questionArray[i].incorrect_answers.concat(questionArray[i].correct_answer);
                 let shuffledAnswersArr = shuffleArray(answersArr);
 
                 jsxParse += `<div class="game-question-answers">
-                <h5>${questionArray[i].question}</h5>
+                <div class="inner-box">
+                    <h5>${questionArray[i].question}</h5>
 
-                <label><input type="radio" name="question-${i}" value="${shuffledAnswersArr[0]}">${shuffledAnswersArr[0]}</label>
-                <label><input type="radio" name="question-${i}" value="${shuffledAnswersArr[1]}">${shuffledAnswersArr[1]}</label>
-                <label><input type="radio" name="question-${i}" value="${shuffledAnswersArr[2]}">${shuffledAnswersArr[2]}</label>
-                <label><input type="radio" name="question-${i}" value="${shuffledAnswersArr[3]}">${shuffledAnswersArr[3]}</label>
+                    <label><input type="radio" name="question-${i}"
+                            value="${shuffledAnswersArr[0]}">${shuffledAnswersArr[0]}</label>
+                    <label><input type="radio" name="question-${i}"
+                            value="${shuffledAnswersArr[1]}">${shuffledAnswersArr[1]}</label>
+                    <label><input type="radio" name="question-${i}"
+                            value="${shuffledAnswersArr[2]}">${shuffledAnswersArr[2]}</label>
+                    <label><input type="radio" name="question-${i}"
+                            value="${shuffledAnswersArr[3]}">${shuffledAnswersArr[3]}</label>
 
-            </div>
-            `
+                </div>
+                <div class="icon"></div>
+
+            </div>`
             };
 
 
@@ -144,24 +150,37 @@
             }
         }
 
-        checkAnswers(userAnswers);
+        checkAnswers(userAnswers, arrayOfDiv);
 
     }
 
-    function checkAnswers(userAnswersArr) {
+    function checkAnswers(userAnswersArr, arrayOfDiv) {
         let correctCount = 0;
         let wrongCount = 0;
 
 
         for (let i = 0; i < userAnswersArr.length; i++) {
             if (correctAnswers[i] === userAnswersArr[i]) {
+
+                let correctIcon = document.createElement("i");
+                correctIcon.classList.add("far", "fa-check-circle", "fa-2x", "right-answer");
+                arrayOfDiv[i].appendChild(correctIcon);
+
                 correctCount++;
+
             } else {
+                let correctIcon = document.createElement("i");
+                correctIcon.classList.add("far", "fa-times-circle", "fa-2x", "wrong-answer");
+                arrayOfDiv[i].appendChild(correctIcon);
+
                 wrongCount++;
             }
         }
 
         console.log(`You have: ${correctCount} correct answers and ${wrongCount} wrong answers. Enjoy!`);
     }
+
+
+
 
 })();
