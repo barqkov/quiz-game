@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="game-canvas">
+        <div class="game-menu-holder">
+            <form id="game-options-form">
+                <input id="game-number-of-questions" type="number" placeholder="Number of questions" min="10" max="50"
+                    required>
+                <select id="game-categories">
+                    <option value="" disabled selected>Categories</option>
+                </select>
+                <select id="game-difficulty" required>
+                    <option value="" disabled selected>Difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <input type="submit" value="Start game">
+            </form>
+        </div>
+        <div class="game-questions-holder">
+            <form id="game-questions-form">
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>
