@@ -102,6 +102,8 @@
 
             jsxParse += `<input type="submit" value="Submit" class="submit-form-button">`
             questionsForm.innerHTML = jsxParse;
+            console.log(correctAnswers);
+
 
             questionsForm.addEventListener('submit', getAnswers);
 
@@ -109,7 +111,6 @@
 
     }
 
-    const gameQuestion = document.querySelector(".game-question-answers h5");
 
     gameOptionsForm.addEventListener("submit", getGameOptions);
 
@@ -127,7 +128,40 @@
     }
 
     function getAnswers(e) {
+
         e.preventDefault();
 
+        let nodeListOfDiv = document.querySelectorAll(".game-question-answers");
+        let arrayOfDiv = Array.from(nodeListOfDiv);
+        let userAnswers = [];
+
+        for (let i = 0; i < arrayOfDiv.length; i++) {
+            if (arrayOfDiv[i].querySelector("input:checked")) {
+                userAnswers.push(arrayOfDiv[i].querySelector("input:checked").value);
+
+            } else {
+                userAnswers.push("Not answered")
+            }
+        }
+
+        checkAnswers(userAnswers);
+
     }
+
+    function checkAnswers(userAnswersArr) {
+        let correctCount = 0;
+        let wrongCount = 0;
+
+
+        for (let i = 0; i < userAnswersArr.length; i++) {
+            if (correctAnswers[i] === userAnswersArr[i]) {
+                correctCount++;
+            } else {
+                wrongCount++;
+            }
+        }
+
+        console.log(`You have: ${correctCount} correct answers and ${wrongCount} wrong answers. Enjoy!`);
+    }
+
 })();
